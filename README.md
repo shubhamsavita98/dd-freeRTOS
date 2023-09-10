@@ -23,4 +23,4 @@ Queue works as FIFO.
 	- Scheduler (VTaskStartScheduler())
 
 
-#References: medium.com
+#References: FreeRTOS.org, medium.com
