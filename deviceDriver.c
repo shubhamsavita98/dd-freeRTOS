@@ -3,8 +3,8 @@
 * Author: Shubham Kumar Savita
 * Description: The following code is written to demonstarte
 *              Device Driver Development using FreeRTOS based
-*              on Queues. The current repo has/will(have)
-*              Device Driver developed based on this reference
+*              on Queues. The current repo has simple Device Driver 
+			   developed based on this reference
 *              and steps mentioned in README.md file.
 * References: FreeRTOS.org, medium.com
 ***************************************************************/
@@ -17,7 +17,6 @@
 
 
 // Data Structure Implementation
-
 typedef struct{
 
     uint16_t deviceID;
@@ -26,9 +25,7 @@ typedef struct{
   
 } d_driver;
 
-
 // Device Initialization
-
 void deviceInit(d_driver *device, uint16_t deviceID){
 
 	device->deviceID = deviceID;
@@ -38,11 +35,9 @@ void deviceInit(d_driver *device, uint16_t deviceID){
 		printf("Error!! Queue NOT created.");
 		/*need to handle it better.*/
 	}
-
 }
 
 // Device function as FreeRTOS task
-
 void deviceFunction(void *pvParameters){
 
 	d_driver *dparam = (d_driver *)pvParameters;
@@ -56,8 +51,11 @@ void deviceFunction(void *pvParameters){
 	}
 }
 
-// Device interface function for other tasks to communicate with device.
-
+/*
+* Device interface function for other tasks to communicate with device.
+* deviceInterface function should be called by other tasks in practical usecases.
+* Calling from main is not recommended in actual implementations.
+*/
 void deviceInterface(d_driver *dInterface, int request){
 
 	if(dInterface->isDeviceBusy){
@@ -69,7 +67,6 @@ void deviceInterface(d_driver *dInterface, int request){
 }
 
 // Create and Schedule FreeRTOS tasks for device function
-
 void main(void){
 
 	d_driver device;
